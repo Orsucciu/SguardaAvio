@@ -98,7 +98,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        switchD.setOnCheckedChangeListener { buttonView, isChecked ->
+        /*switchD.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if(switchD.isChecked){
                 switchD.text = "Arrivee"
@@ -116,7 +116,7 @@ class HomeFragment : Fragment() {
                 root.textViewA.isEnabled = false
                 root.dateA.isEnabled = false
             }
-        }
+        }*/
 
         fromDate.setOnClickListener(View.OnClickListener { view ->
             val currentCalendar = Calendar.getInstance()
@@ -146,15 +146,23 @@ class HomeFragment : Fragment() {
         })
 
         root.buttonGO.setOnClickListener(View.OnClickListener {
-            val timePicked: String
+            if (text_home.text.toString() != "") {
+                val timeD: String = toDate.text.toString()
+                val timeA: String = fromDate.text.toString()
+                val situation: String
 
-            if(switchD.isChecked == true) {
-                timePicked = toDate.text.toString()
-            }else{
-                timePicked = fromDate.text.toString()
+                if (!switchD.isChecked) {
+                    situation = "Departure from "
+                } else {
+                    situation = "Arrival at "
+                }
+
+                Toast.makeText(
+                    FlightApplication.appContext,
+                    situation + " " + text_home.text.toString() + ", " + timeA + " " + timeD,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-
-            Toast.makeText(FlightApplication.appContext, text_home.text.toString() + ' ' + timePicked, Toast.LENGTH_SHORT).show()
         })
 
         return root
