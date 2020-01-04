@@ -33,13 +33,27 @@ class Utils private constructor() {
         }
 
         fun getAirportsListJson() : JsonArray{
-            var input: InputStream? = null
-            input = FlightApplication.appAssetManager.open("airports.json")
+            val input : InputStream = FlightApplication.appAssetManager.open("airports.json")
             val parser = JsonParser()
             val jsonElement = parser.parse(getTextFromStream(input))
             return jsonElement.asJsonArray
         }
 
+        fun getFlightList(flightsJson : String) : List<Flight> {
+            val parser = JsonParser()
+            val jsonElement = parser.parse(flightsJson)
+            return getFlightList(jsonElement.asJsonArray)
+        }
+
+        fun getFlightList(flightListObject : JsonArray) : List<Flight> {
+            val flightList = ArrayList<Flight>()
+
+            for (flightObject in flightListObject) {
+                flightList.add(Gson().fromJson(flightObject.asJsonObject, Flight::class.java))
+            }
+
+            return flightList
+        }
 
         fun getText(filename: String): String? {
             val f = File(getRootDirectory(), filename)
