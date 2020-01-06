@@ -112,23 +112,24 @@ class HomeFragment : Fragment() {
 
             homeViewModel.isDeparture.value = isChecked
 
-            /*
+
+            //this logic changed the switch to departure/arrival. Used for screen 2 (this is screen one)
             if(switchD.isChecked){
                 switchD.text = "Arrivee"
-                root.textViewD.isEnabled = false
-                root.dateD.isEnabled = false
+                //root.textViewD.isEnabled = false
+                //root.dateD.isEnabled = false
 
-                root.textViewA.isEnabled = true
-                root.dateA.isEnabled = true
+                //root.textViewA.isEnabled = true
+                //root.dateA.isEnabled = true
 
             }else {
                 switchD.text = "Depart"
-                root.textViewD.isEnabled = true
-                root.dateD.isEnabled = true
+                //root.textViewD.isEnabled = true
+                //root.dateD.isEnabled = true
 
-                root.textViewA.isEnabled = false
-                root.dateA.isEnabled = false
-            }*/
+                //root.textViewA.isEnabled = false
+                //root.dateA.isEnabled = false
+            }
         }
 
 

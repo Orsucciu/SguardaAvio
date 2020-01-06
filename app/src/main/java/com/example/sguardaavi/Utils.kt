@@ -130,5 +130,6 @@ class Utils private constructor() {
 
             _saveData(filteredAirports.toString().toByteArray(), "tempJson")
         }
+
     }
 }

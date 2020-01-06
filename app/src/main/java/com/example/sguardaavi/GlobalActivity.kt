@@ -97,7 +97,19 @@ class GlobalActivity : AppCompatActivity() {
         try {
 
             val makeApiUrl = StringBuilder(apiUrl)
-
+            makeApiUrl.append('?')
+            makeApiUrl.append("airport")
+            makeApiUrl.append('=')
+            makeApiUrl.append(getParams.get("airport"))
+            makeApiUrl.append('&')
+            makeApiUrl.append("begin")
+            makeApiUrl.append('=')
+            makeApiUrl.append(getParams.get("begin"))
+            makeApiUrl.append('&')
+            makeApiUrl.append("end")
+            makeApiUrl.append('=')
+            makeApiUrl.append(getParams.get("end"))
+            /*
             if (!getParams.isEmpty()) {
                 makeApiUrl.append('?')
                 for ((k, v) in getParams) {
@@ -107,6 +119,7 @@ class GlobalActivity : AppCompatActivity() {
                     makeApiUrl.append('&')
                 }
             }
+            */
 
             Log.i("REQUEST-URL", makeApiUrl.toString())
 
