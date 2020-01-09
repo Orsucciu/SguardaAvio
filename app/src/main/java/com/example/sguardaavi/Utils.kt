@@ -1,5 +1,6 @@
 package com.example.sguardaavi
 
+import com.example.sguardaavi.data.Airport
 import android.content.Context
 import android.util.Log
 import com.google.gson.Gson

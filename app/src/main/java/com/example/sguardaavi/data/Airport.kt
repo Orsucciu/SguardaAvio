@@ -1,4 +1,4 @@
-package com.example.sguardaavi
+package com.example.sguardaavi.data;
 
 /**
  * Created by sergio on 2019-11-10

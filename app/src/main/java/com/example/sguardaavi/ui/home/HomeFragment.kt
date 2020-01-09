@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.sguardaavi.*
+import com.example.sguardaavi.data.Airport
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.time.LocalDate
@@ -145,7 +146,7 @@ class HomeFragment : Fragment() {
             )
             val datePicker = datePickerDialog.datePicker
             currentCalendar.add(Calendar.DAY_OF_MONTH, -1)
-            datePicker.maxDate = currentCalendar.timeInMillis
+            //datePicker.maxDate = currentCalendar.timeInMillis
             datePickerDialog.show()
         })
 
@@ -160,7 +161,7 @@ class HomeFragment : Fragment() {
             )
             val datePicker = datePickerDialog.datePicker
             currentCalendar.add(Calendar.DAY_OF_MONTH, 1)
-            datePicker.maxDate = currentCalendar.timeInMillis
+            //datePicker.maxDate = currentCalendar.timeInMillis
             datePickerDialog.show()
         })
 
