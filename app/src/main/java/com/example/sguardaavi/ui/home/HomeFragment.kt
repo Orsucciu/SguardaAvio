@@ -15,6 +15,7 @@ import com.example.sguardaavi.*
 import com.example.sguardaavi.data.Airport
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import java.io.Console
 import java.time.LocalDate
 import java.time.ZoneOffset
 import java.util.*
@@ -178,7 +179,7 @@ class HomeFragment : Fragment() {
                 }
 
                 Toast.makeText(
-                    FlightApplication.appContext,
+                    getActivity(),
                     situation + " " + text_home.text.toString() + ", " + timeA + " " + timeD,
                     Toast.LENGTH_SHORT
                 ).show()
@@ -188,12 +189,15 @@ class HomeFragment : Fragment() {
                 val isArrival = !homeViewModel.isDeparture.value!!
                 val icao = getIcao(textView.text.toString())
 
+                Log.i("Info", "$icao ICAO SELECTED")
+
                 if (icao != null) {
+                    Log.i("Info","Launching flights list....")
                     GlobalActivity.startActivity(this.requireActivity(), begin, end, isArrival, icao)
 
                 } else {
                     Toast.makeText(
-                        FlightApplication.appContext,
+                        getActivity(),
                         "Unable to find airport name",
                         Toast.LENGTH_SHORT
                     ).show()

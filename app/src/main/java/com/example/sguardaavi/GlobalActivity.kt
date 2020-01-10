@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import android.widget.Toast
 import android.os.AsyncTask
@@ -13,6 +14,9 @@ import android.util.Log
 import java.net.URL
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.sguardaavi.ui.flightlist.FlightListFragment
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -27,12 +31,12 @@ class GlobalActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.global_activity)
 
         val intent = intent
 
-        val begin = intent.getLongExtra(BEGIN, -1).toString()
-        val end = intent.getLongExtra(END, -1).toString()
+        val begin = intent.getLongExtra(BEGIN, -1)//.toString()
+        val end = intent.getLongExtra(END, -1)//.toString()
         val isArrival = intent.getBooleanExtra(IS_ARRIVAL, false)
         val icao = intent.getStringExtra(ICAO)
 
@@ -57,8 +61,8 @@ class GlobalActivity : AppCompatActivity() {
 
                 val params = mapOf(
                     "airport" to icao,
-                    "begin" to begin,
-                    "end" to end
+                    "begin" to begin.toString(),
+                    "end" to end.toString()
                 ) as Map<String, String>
 
                 val resultJson = requestFromServer(apiUrl.toString(), params)
@@ -80,6 +84,11 @@ class GlobalActivity : AppCompatActivity() {
             }
         }.execute()
 
+        val flFragment = FlightListFragment.newInstance(begin, end, isArrival, icao)
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, flFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
 
     }
 

@@ -62,7 +62,10 @@ class FlightListViewModel(application: Application) :
             },
             Response.ErrorListener { })
         // Add the request to the RequestQueue.
-        queue.add(stringRequest)
+        queue.run {
+            // Add the request to the RequestQueue.
+            add(stringRequest)
+        }
     }
 
     private fun getFlightsRequestJson(jsonString: String): JsonArray {
