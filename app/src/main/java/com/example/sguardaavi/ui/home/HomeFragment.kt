@@ -189,13 +189,8 @@ class HomeFragment : Fragment() {
                 val icao = getIcao(textView.text.toString())
 
                 if (icao != null) {
-                    GlobalActivity.startActivity(
-                        this.requireActivity(),
-                        begin,
-                        end,
-                        isArrival,
-                        icao
-                    )
+                    GlobalActivity.startActivity(this.requireActivity(), begin, end, isArrival, icao)
+
                 } else {
                     Toast.makeText(
                         FlightApplication.appContext,
