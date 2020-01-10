@@ -1,17 +1,18 @@
 package com.example.sguardaavi.ui.flightlist
 
+import android.content.Intent
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sguardaavi.FlightDetailsActivity
+import com.example.sguardaavi.R
 import com.example.sguardaavi.Utils
 import com.example.sguardaavi.data.Flight
 import com.example.sguardaavi.ui.flightlist.FlightListAdapter.FlightViewHolder
 import java.util.*
-import java.time.*
-import android.view.LayoutInflater
-import com.example.sguardaavi.R
 
 
 class FlightListAdapter : RecyclerView.Adapter<FlightViewHolder>() {
@@ -47,8 +48,24 @@ class FlightListAdapter : RecyclerView.Adapter<FlightViewHolder>() {
         holder.callSignView!!.text = (mFlightsList[position].callsign);
         holder.firstSeen!!.text = firstseen.toString()
         holder.lastSeen!!.text = lastseen.toString()
-        holder.flightTime!!.text = "A"
+        holder.flightTime!!.text = java.time.format.DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.ofEpochSecond(mFlightsList[position].lastSeen - mFlightsList[position].firstSeen))
 
+
+        holder.itemView.setOnClickListener { v ->
+            val context = v.context
+            val intent = Intent(context, FlightDetailsActivity::class.java)
+            intent.putExtra("icao", mFlightsList[position].icao24)
+            intent.putExtra("estArrivalAirport", mFlightsList[position].estArrivalAirport)
+            intent.putExtra("estDepartureAirport", mFlightsList[position].estDepartureAirport)
+            intent.putExtra(
+                "flightTime",
+                java.time.format.DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.ofEpochSecond(mFlightsList[position].lastSeen - mFlightsList[position].firstSeen))
+
+            )
+            intent.putExtra("firstSeen", mFlightsList[position].firstSeen)
+            intent.putExtra("lastSeen", mFlightsList[position].lastSeen)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
